@@ -1,0 +1,11 @@
+{
+  "study_sessions": {
+    "preferred_duration_minutes": 45,
+    "common_subjects": ["physics", "math"],
+    "most_active_hours": ["20:00", "23:30"]
+  },
+  "work_style": {
+    "starts_tasks_without_prompt": true,
+    "abandons_tasks_frequency": "low"
+  }
+}

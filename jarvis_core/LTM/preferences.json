@@ -1,0 +1,8 @@
+{
+  "interaction_style": "direct_minimal",
+  "autonomy_level": "low_to_medium",
+  "voice_feedback": true,
+  "spoken_suggestions": "rare",
+  "preferred_study_time": "night",
+  "interruptions_allowed": false
+}

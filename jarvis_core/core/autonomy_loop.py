@@ -5,6 +5,7 @@ from datetime import datetime
 from jarvis_core.core.planner import Planner
 from jarvis_core.core.executor import Executor
 from jarvis_core.core.memory import WorkingMemory
+from jarvis_core.core.ltm import LongTermMemory
 from jarvis_core.interfaces.voice import VoiceInterface
 
 from jarvis_core.models.llm import LLM
@@ -22,12 +23,13 @@ class AutonomyLoop:
         self.planner = Planner()
         self.executor = Executor()
         self.memory = WorkingMemory()
+        self.ltm = LongTermMemory() # Layer 3 Long Term Memory
         self.state = SessionState() # Layer 2 Session Memory
         self.voice = VoiceInterface(event_bus)
         
         self.llm = LLM()
         self.tts = PiperTTS()
-        self.conversation_manager = ConversationManager(event_bus, self.llm, self.tts, self.memory)
+        self.conversation_manager = ConversationManager(event_bus, self.llm, self.tts, self.memory, self.ltm)
         
         # Decision Engine
         self.decision_engine = DecisionEngine(self.memory, self.state)

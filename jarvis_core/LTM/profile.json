@@ -1,0 +1,8 @@
+{
+  "user_name": "Rusith",
+  "location": "Sri Lanka",
+  "timezone": "Asia/Colombo",
+  "student": true,
+  "core_interests": ["AI", "robotics", "aerospace"],
+  "assistant_trust_level": "limited"
+}
