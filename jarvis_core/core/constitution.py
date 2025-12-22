@@ -34,7 +34,7 @@ Every response must be a valid JSON object matching this schema exactly:
   },
   "actions": [
     {
-      "type": "string (e.g., set_timer, start_music)",
+      "type": "string (e.g., start_timer, open_app)",
       "params": { "param_name": "value" }
     }
   ],

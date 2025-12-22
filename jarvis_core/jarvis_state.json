@@ -1,65 +1,9 @@
 {
-    "session_id": "1766311673",
-    "last_active": 1766371359.0451798,
+    "session_id": "1766373416",
+    "last_active": 1766375328.160486,
     "agent_state": "idle",
-    "active_tasks": [
-        {
-            "task": "Nothing assigned",
-            "status": "",
-            "due_at": null,
-            "added_at": 1766311880.7482562
-        },
-        {
-            "task": "study physics",
-            "status": "",
-            "due_at": "2025-12-21 16:41:53",
-            "added_at": 1766311957.6506047
-        },
-        {
-            "task": "study reminder",
-            "status": "",
-            "due_at": "2025-12-21 16:01:00",
-            "added_at": 1766312108.2797258
-        },
-        {
-            "task": "We might need to take a break",
-            "status": "new",
-            "due_at": "2025-12-21 15:46:40",
-            "added_at": 1766312238.270042
-        },
-        {
-            "task": "take a break",
-            "status": "",
-            "due_at": "2025-12-21 17:36:11",
-            "added_at": 1766318707.2493079
-        },
-        {
-            "task": "Tell me something about yourself",
-            "status": "",
-            "due_at": null,
-            "added_at": 1766319047.9471085
-        },
-        {
-            "task": "Tell me something about you.",
-            "status": "done",
-            "due_at": "2025-12-21 17:42:29",
-            "added_at": 1766319196.6863182
-        }
-    ],
-    "preferences": {
-        "new_user_preferences": {
-            "follow_up_after_initial_greeting": false
-        },
-        "reminder_notification_device": "...",
-        "reminders": "notify",
-        "break_interval_minutes": 2,
-        "reminder_frequency": "2 minutes",
-        "language": "en",
-        "user_name": "Rusith",
-        "goal": "build an offline autonomous assistant like myself"
-    },
-    "action_history": {
-        "FOLLOW_UP": 1766371143.7407112
-    },
-    "last_autonomous_action": 1766371143.7407112
+    "active_tasks": [],
+    "preferences": {},
+    "action_history": {},
+    "last_autonomous_action": 0
 }
