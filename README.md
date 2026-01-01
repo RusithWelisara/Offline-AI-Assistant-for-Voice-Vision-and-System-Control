@@ -1,4 +1,4 @@
-#Offline AI Assistant for Voice, Vision, and System Control
+# Offline AI Assistant for Voice, Vision, and System Control
 
 ---
 
@@ -57,8 +57,6 @@ and hardware-integrated.
 
 The system is actively evolving as new capabilities are added and refined.
 The focus remains on robustness, clarity, and real-world usability.
-
----
 
 ---
 
