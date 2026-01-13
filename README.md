@@ -41,7 +41,7 @@ and hardware-integrated.
 
 - Offline-first architecture to reduce latency and remove cloud dependency
 - Modular pipeline to allow components (vision, voice, logic) to be swapped independently
-- Clear separation between perception, reasoning, and action layers
+- Clear separation between perception, reasoning, and action layers 
 
 ---
 
