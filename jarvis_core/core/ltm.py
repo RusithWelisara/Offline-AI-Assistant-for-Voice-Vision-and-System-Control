@@ -42,7 +42,6 @@ class LongTermMemory:
         """Returns formatted string for System Prompt (Layer 3)."""
         interests = ", ".join(self.profile.get("core_interests", []))
         return (
-            f"PERSONAL PROFILE (LTM):\n"
             f"- Name: {self.profile.get('user_name', 'Unknown')}\n"
             f"- Location: {self.profile.get('location', 'Unknown')}\n"
             f"- Role: {self.profile.get('student', False) and 'Student' or 'User'}\n"
@@ -53,7 +52,7 @@ class LongTermMemory:
     def get_preferences_string(self) -> str:
         """Returns formatted string for System Prompt."""
         prefs = "\n".join([f"- {k}: {v}" for k, v in self.preferences.items()])
-        return f"USER PREFERENCES (LTM):\n{prefs}"
+        return prefs
 
     def get_habits_string(self) -> str:
         """Returns formatted string for System Prompt."""
@@ -61,7 +60,7 @@ class LongTermMemory:
         habits_str = []
         for category, details in self.habits.items():
             habits_str.append(f"- {category}: {json.dumps(details)}")
-        return "USER HABITS (LTM):\n" + "\n".join(habits_str)
+        return "\n".join(habits_str)
 
     def process_proposal(self, proposal: Dict[str, Any]) -> bool:
         """

@@ -1,4 +1,5 @@
 import logging
+import time
 import os
 import shutil
 import subprocess
@@ -81,6 +82,8 @@ class PiperTTS:
         
         temp_wav = "temp_tts_output.wav"
         
+        start_gen = time.time()
+        
         try:
             cmd = [
                 self.piper_binary,
@@ -92,14 +95,21 @@ class PiperTTS:
             process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate(input=text.encode('utf-8'))
             
+            gen_time = time.time() - start_gen
+            logger.info(f"TTS Generation Delay: {gen_time:.2f}s")
+            
             if process.returncode != 0:
                 logger.error(f"Piper TTS Error: {stderr.decode('utf-8')}")
                 return
 
+            start_play = time.time()
             if os.path.exists(temp_wav):
                 data, fs = sf.read(temp_wav)
                 sd.play(data, fs)
                 sd.wait() # Wait for playback to finish
+                
+                play_time = time.time() - start_play
+                logger.debug(f"TTS Playback took {play_time:.2f}s")
                 
                 # cleanup
                 os.remove(temp_wav)
