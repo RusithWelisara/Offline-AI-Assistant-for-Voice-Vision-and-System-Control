@@ -11,7 +11,8 @@ cd /d "%~dp0"
 set "PYTHONPATH=%~dp0;%PYTHONPATH%"
 
 echo Starting JARVIS...
-python "%PROJECT_ROOT%\main.py"
+:: python "%PROJECT_ROOT%\main.py"
+python "D:\AI Assistant\Voice Assistant (Gemini API)\main.py"
 
 if errorlevel 1 (
     echo JARVIS exited with error or was stopped.

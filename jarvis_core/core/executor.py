@@ -10,13 +10,13 @@ from typing import Dict, Any, Callable, Optional
 logger = logging.getLogger(__name__)
 
 class Executor:
-    """
     The Action Dispatcher.
     Strictly validates and routes actions to registered handlers.
     NEVER allows raw code execution.
     """
-    def __init__(self, event_bus):
+    def __init__(self, event_bus, memory=None):
         self.event_bus = event_bus
+        self.memory = memory
         self._registry = {}
         self._register_default_actions()
         self._subscribe()
@@ -56,17 +56,27 @@ class Executor:
 
         # Strict Type Validation
         try:
+            start_exec = time.time()
             validated_args = self._validate_args(action_name, args, schema)
             logger.info(f"Dispatching action: {action_name} with {validated_args}")
             
+            # Log Tool Use
+            if self.memory:
+                self.memory.add("tool_use", f"Executing {action_name}", meta=validated_args)
+
             # Execute (some actions might be async, currently assuming sync handlers or threads)
             # If handler is async, await it. If sync, run it.
             if asyncio.iscoroutinefunction(handler):
-                await handler(**validated_args)
+                result = await handler(**validated_args)
             else:
-                await asyncio.to_thread(handler, **validated_args)
+                result = await asyncio.to_thread(handler, **validated_args)
                 
-            logger.info(f"Action {action_name} executed successfully.")
+            exec_duration = time.time() - start_exec
+            logger.info(f"Action {action_name} executed successfully (Execution Delay: {exec_duration:.2f}s).")
+            
+            # Log Tool Result
+            if self.memory:
+                self.memory.add("tool_result", f"Action {action_name} completed successfully.", meta={"duration": exec_duration, "result": str(result)})
             
         except ValueError as e:
             logger.error(f"Validation failed for {action_name}: {e}")

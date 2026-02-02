@@ -4,5 +4,6 @@
   "voice_feedback": true,
   "spoken_suggestions": "rare",
   "preferred_study_time": "night",
-  "interruptions_allowed": false
+  "interruptions_allowed": false,
+  "context_window_limit": 1800
 }

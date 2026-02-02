@@ -21,8 +21,8 @@ class AutonomyLoop:
     def __init__(self, event_bus):
         self.event_bus = event_bus
         self.planner = Planner()
-        self.executor = Executor(event_bus)
         self.memory = WorkingMemory()
+        self.executor = Executor(event_bus, self.memory)
         self.ltm = LongTermMemory() # Layer 3 Long Term Memory
         self.state = SessionState() # Layer 2 Session Memory
         self.voice = VoiceInterface(event_bus)

@@ -92,13 +92,22 @@ class VoiceInterface:
                     continue
                 
                 # 3. Transcribe (Blocking)
-                text = self.stt.listen_and_transcribe()
+                stt_result = self.stt.listen_and_transcribe()
+                text = stt_result.get("text")
+                processing_time = stt_result.get("processing_time", 0)
                 
                 if text:
                     logger.info(f"User said: {text}")
                     # Push event to bus via main loop safely
+                    # cycle_start_time is when speech ended and processing began
+                    cycle_start_time = time.time() - processing_time
                     asyncio.run_coroutine_threadsafe(
-                        self.event_bus.publish("user_speech", {"text": text, "source": "voice"}),
+                        self.event_bus.publish("user_speech", {
+                            "text": text, 
+                            "source": "voice",
+                            "stt_delay": processing_time,
+                            "cycle_start_time": cycle_start_time
+                        }),
                         self.main_loop
                     )
             

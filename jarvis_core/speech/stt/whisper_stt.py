@@ -1,4 +1,5 @@
 import logging
+import time
 import os
 import speech_recognition as sr
 from faster_whisper import WhisperModel
@@ -19,9 +20,10 @@ class WhisperSTT:
         self.recognizer = sr.Recognizer()
         logger.info("Whisper model loaded.")
 
-    def listen_and_transcribe(self) -> str:
+    def listen_and_transcribe(self) -> dict:
         """
         Captures audio from the microphone and transcribes it.
+        Returns a dict with 'text' and 'processing_time'.
         """
         with sr.Microphone() as source:
             logger.info("Adjusting for ambient noise... Please wait.")
@@ -30,6 +32,8 @@ class WhisperSTT:
             
             try:
                 audio = self.recognizer.listen(source, timeout=None) # Listen until silence
+                
+                start_time = time.time()
                 logger.info("Processing audio...")
                 
                 # faster-whisper works well with file paths.
@@ -49,10 +53,15 @@ class WhisperSTT:
                 # Cleanup
                 if os.path.exists(temp_filename):
                     os.remove(temp_filename)
-                    
-                logger.info(f"Transcribed: {full_text}")
-                return full_text
+                
+                processing_time = time.time() - start_time
+                logger.info(f"Transcribed: {full_text} (STT Delay: {processing_time:.2f}s)")
+                
+                return {
+                    "text": full_text,
+                    "processing_time": processing_time
+                }
 
             except Exception as e:
                 logger.error(f"Error during transcription: {e}")
-                return ""
+                return {"text": "", "processing_time": 0}
